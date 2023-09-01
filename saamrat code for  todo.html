@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App with Vue 3</title>
+    <style>
+        /* Add your CSS styles here */
+    </style>
+    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Todo App</h2>
+        <input v-model="newTodo" @keyup.enter="addTodo" placeholder="Add a new task">
+        
+        <ul>
+            <li v-for="(todo, index) in todos" :key="index">
+                {{ todo }}
+                <button @click="deleteTodo(index)">Delete</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    newTodo: '',
+                    todos: []
+                };
+            },
+            methods: {
+                addTodo() {
+                    if (this.newTodo.trim() !== '') {
+                        this.todos.push(this.newTodo);
+                        this.newTodo = '';
+                    }
+                },
+                deleteTodo(index) {
+                    this.todos.splice(index, 1);
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>

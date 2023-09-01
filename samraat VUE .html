@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 3 Experiment</title>
+    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Conditional Rendering Examples</h2>
+        
+        <p v-if="showParagraph">ABCDEFGHIJKLMNOPQRSTUVWXYZ.</p>
+        <p v-else>ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+        
+        <p v-show="showText">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+        
+        <ul>
+            <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+        </ul>
+        
+        <p v-for="item in itemsWithCondition" :key="item.id">{{ item.name }} (v-for with v-if)</p>
+        
+        <input v-model="inputText" placeholder="Type here">
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    showParagraph: true,
+                    showText: false,
+                    items: [
+                        { id: 1, name: 'SYDNEY' },
+                        { id: 2, name: 'MELBOURNE' },
+                        { id: 3, name: 'GEELONG' }
+                    ],
+                    inputText: ''
+                };
+            },
+            computed: {
+                itemsWithCondition() {
+                    return this.items.filter(item => item.id % 2 === 0);
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
